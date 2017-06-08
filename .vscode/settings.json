@@ -1,0 +1,7 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+"javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+"javascript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+"typescript.format.placeOpenBraceOnNewLineForFunctions": true,
+"typescript.format.placeOpenBraceOnNewLineForControlBlocks": true
+}
