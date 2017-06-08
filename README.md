@@ -1,6 +1,6 @@
-# tcc-compiler-improved README
+# tcc-compiler README
 
-This is the README for your extension "tcc-compiler-improved". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "tcc-compiler". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
