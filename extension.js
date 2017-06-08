@@ -1,30 +1,86 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-var vscode = require('vscode');
+"use strict";
+const vscode = require("vscode");
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+// When extension is activated.
 function activate(context) {
-
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "tcc-compiler-improved" is now active!');
-
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    var disposable = vscode.commands.registerCommand('extension.sayHello', function () {
-        // The code you place here will be executed every time your command is executed
-
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
+  var path = require("path");
+  let terminalStack = [];
+  var loc = path.join(__dirname, "..", "..");
+  const execSync = require("child_process").execSync;
+  const execFile = require("child_process").execFile;
+  context.subscriptions.push(
+    vscode.commands.registerCommand("tcc.run", () => {
+      if (terminalStack.length === 0) {
+        var output = makeTerminal();
+      }
+      getLatestTerminal().show();
+      var fname = vscode.window.activeTextEditor.document.fileName.toString();
+      getLatestTerminal().sendText(
+        loc + '\\compiler\\tcc.exe -run "' + fname + '"'
+      );
+    })
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("tcc.compile", () => {
+      if (terminalStack.length === 0) {
+        makeTerminal();
+      }
+      var loc = path.join(__dirname, "..", "..");
+      var fname = vscode.window.activeTextEditor.document.fileName;
+      var outname = fname.split("\\");
+      var cnt = outname.length;
+      var outname = outname[cnt - 1].split(".");
+      var output = path.join(
+        vscode.window.activeTextEditor.document.fileName,
+        "..",
+        outname[0] + ".exe"
+      );
+      try {
+        execSync(
+          loc + '\\compiler\\tcc.exe "' + fname + '" -o "' + output + '"'
+        );
+        vscode.window.showInformationMessage("Compile successd");
+      } catch (error) {
+        const editor = vscode.window.activeTextEditor;
+        var errormsg = error.message.split("/");
+        vscode.window.showErrorMessage(errormsg[errormsg.length - 1]);
+        var line = errormsg[errormsg.length - 1].split(":");
+        var position = editor.selection.active;
+        var newPosition = position.with(parseInt(line[1]) - 1, 100);
+        var StartPosition = position.with(parseInt(line[1]) - 1, 0);
+        var newSelection = new vscode.Selection(StartPosition, newPosition);
+        editor.selection = newSelection;
+      }
+    })
+  );
+  function makeTerminal() {
+    terminalStack.push(
+      vscode.window.createTerminal(`compiler #${terminalStack.length + 1}`)
+    );
+  }
+  function makeOutput() {
+    var myOutputChannel = vscode.window.createOutputChannel("Running");
+    myOutputChannel.show();
+    terminalStack.length + 1;
+    return myOutputChannel;
+  }
+  function getLatestTerminal() {
+    return terminalStack[terminalStack.length - 1];
+  }
+  if ("onDidCloseTerminal" in vscode.window) {
+    vscode.window.onDidCloseTerminal(terminal => {
+      terminalStack.pop();
     });
-
-    context.subscriptions.push(disposable);
+  }
+  if ("onDidOpenTerminal" in vscode.window) {
+    vscode.window.onDidOpenTerminal(terminal => {
+      terminalStack.length + 1;
+    });
+  }
 }
 exports.activate = activate;
 
-// this method is called when your extension is deactivated
-function deactivate() {
-}
+// When extension is deactivated.
+function deactivate() {}
 exports.deactivate = deactivate;
+//# sourceMappingURL=extension.js.map
