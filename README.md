@@ -1,27 +1,30 @@
 # TCC Compiler README
 
-This extension use for compiler C script easy
+This extension offers quick and hassle-free C compiling with the TCC compiler.
 
 ## Install 
 ```sh
 ext install tcc-compiler
 ```
 ## Features
-- No need install extra thing
-- Instant run you C program by press ```F10```
-- Compile script to .exe
+- Completely independent.
+- Instantly run the program by pressing ```F10```
+- Compile to executable file.
 
-## How To use ?
+## How To use?
 - Run script  >> ```F10``` <<
 - Compile script   >> ```command: tcc:Compile ``` <<
 
 ## FYI
-- Support windows only
-- Support language ```C```
-- Compile by ```Tiny C compiler```
+- Only supports Windows.
+- Supports: ```C```
+- Compiler: ```Tiny C compiler```
 
 ## License
 MIT
 
 ## Contact info
-veeravat.jeen@bumail.net
+veeravat.jeen@bumail.net <-- Original author
+
+### Want to support?
+Feel free to report bugs, create issues or even pull requests at https://github.com/LiHRaM/vscode-tcc-compiler
