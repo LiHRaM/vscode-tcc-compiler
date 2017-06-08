@@ -1,5 +1,7 @@
 # Change Log
-- 0.0.1 Initial release
-- 0.0.2 Update Readme.md
-- 0.0.3 Reduce extension size
-- 0.0.4 Optimize extension
+All notable changes to the "tcc-compiler-improved" extension will be documented in this file.
+
+Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+
+## [Unreleased]
+- Initial release
