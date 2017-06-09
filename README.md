@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=master)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
+
 # TCC Compiler README
 
 This extension offers quick and hassle-free C compiling with the TCC compiler.
