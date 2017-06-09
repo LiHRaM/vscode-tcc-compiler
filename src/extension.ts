@@ -12,18 +12,12 @@ export function activate(context: vscode.ExtensionContext) {
 	// Send the context to the functions folder to keep this one lean.
   functions.setContext(context);
 
-  /**
-	 * TCC: Run
-	 */
+  // TCC: Run
   context.subscriptions.push(functions.run());
 
-  /**
-	 * TCC: Run with flags...
-	 */
+  // TCC: Run with flags...
   context.subscriptions.push(functions.runWithFlags());
 
-  /**
-	 * TCC: Compile
-	 */
+	 // TCC: Compile
   context.subscriptions.push(functions.compile());
 }

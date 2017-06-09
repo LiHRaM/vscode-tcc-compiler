@@ -68,7 +68,7 @@ export function compile() {
  * Sets the context.
  */
 export function setContext(context: vscode.ExtensionContext) {
-	_context = context;
+  _context = context;
 }
 
 /**
