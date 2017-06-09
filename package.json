@@ -17,20 +17,20 @@
     "contributes": {
         "commands": [
             {
-							"command": "tcc-compiler.run",
-							"title": "Run",
-							"category": "TCC"
-						},
-						{
-							"command": "tcc-compiler.runWithFlags",
-							"title": "Run with flags...",
-							"category": "TCC"
-						},
-						{
-							"command": "tcc-compiler.compile",
-							"title": "Compile",
-							"category": "TCC"
-						}
+                "command": "tcc-compiler.run",
+                "title": "Run",
+                "category": "TCC"
+            },
+            {
+                "command": "tcc-compiler.runWithFlags",
+                "title": "Run with flags...",
+                "category": "TCC"
+            },
+            {
+                "command": "tcc-compiler.compile",
+                "title": "Compile",
+                "category": "TCC"
+            }
         ]
     },
     "scripts": {
