@@ -8,8 +8,10 @@ let _context = null;
 const _execSync = require("child_process").execSync;
 const _execFile = require("child_process").execFile;
 
-// Main functions
-export function run() {
+/**
+ * Compiles and runs the currently open C file.
+ */
+export function run(): vscode.Disposable {
   return vscode.commands.registerCommand("tcc-compiler.run", () => {
     checkTerminal();
     getLatestTerminal().sendText(tcc(' -run "' + getFileName() + '"'));
@@ -17,51 +19,58 @@ export function run() {
   });
 }
 
-export function runWithFlags() {
-  return vscode.commands.registerCommand(
-    "tcc-compiler.runWithFlags",
-    (flags: string) => {
-      checkTerminal();
-      getLatestTerminal().sendText(
-        tcc(flags + ' -run "' + getFileName() + '"')
-      );
-      getLatestTerminal().show();
-    }
-  );
-}
-
-export function compile() {
-  return vscode.commands.registerCommand("tcc-compiler.compile", () => {
-    checkTerminal();
-    var loc = path.join(__dirname, "..", "..");
-    var fname = vscode.window.activeTextEditor.document.fileName;
-    var outname = fname.split("\\");
-    var cnt = outname.length;
-    var outname = outname[cnt - 1].split(".");
-    var output = path.join(
-      vscode.window.activeTextEditor.document.fileName,
-      "..",
-      outname[0] + ".exe"
-    );
-    try {
-      let cmd = tcc(' "' + getFileName() + '" -o "' + output + '"');
-      _execSync(cmd);
-      vscode.window.showInformationMessage("Compile success!");
-    } catch (error) {
-      // TODO: Do this better.
-      const editor = vscode.window.activeTextEditor;
-      var errormsg = error.message.split("/");
-      vscode.window.showErrorMessage(errormsg[errormsg.length - 1]);
-      var line = errormsg[errormsg.length - 1].split(":");
-      var position = editor.selection.active;
-      var newPosition = position.with(parseInt(line[1]) - 1, 100);
-      var StartPosition = position.with(parseInt(line[1]) - 1, 0);
-      var newSelection = new vscode.Selection(StartPosition, newPosition);
-      editor.selection = newSelection;
-    }
+/**
+ * Compiles the current file with user-specified flags and then runs it.
+ * It does not save the compiled file.
+ */
+export function runWithFlags(): vscode.Disposable {
+  return vscode.commands.registerCommand("tcc-compiler.runWithFlags", () => {
+    let flags = " ";
+    vscode.window
+      .showInputBox({ prompt: "Please input flags." })
+      .then((val: string) => {
+        flags += val;
+        checkTerminal();
+        getLatestTerminal().sendText(
+          tcc(flags + ' -run "' + getFileName() + '"')
+        );
+        getLatestTerminal().show();
+      });
   });
 }
 
+/**
+ * Compiles the currently open C file.
+ */
+export function compile(): vscode.Disposable {
+  return vscode.commands.registerCommand("tcc-compiler.compile", () => {
+    checkTerminal();
+    _execSync(() => {
+      getLatestTerminal().sendText(tcc(getFileName()));
+      getLatestTerminal().show();
+    });
+  });
+}
+
+/**
+ * Compiles the currently open C file with user specified flags.
+ */
+export function compileWithFlags(): vscode.Disposable {
+  return vscode.commands.registerCommand(
+    "tcc-compiler.compileWithFlags",
+    () => {
+      let flags = " ";
+      vscode.window
+        .showInputBox({ prompt: "Please input flags." })
+        .then((val: string) => {
+          flags += val;
+          checkTerminal();
+          getLatestTerminal().sendText(tcc(flags + " " + getFileName()));
+					getLatestTerminal().show();
+        });
+    }
+  );
+}
 // Helper functions
 
 /**
@@ -74,7 +83,7 @@ export function setContext(context: vscode.ExtensionContext) {
 /**
  * Creates a new terminal if none exist.
  */
-export function checkTerminal() {
+function checkTerminal() {
   if (0 === _terminalStack.length) {
     let terminal = vscode.window.createTerminal(
       `compiler #${_terminalStack.length + 1}`
@@ -84,23 +93,38 @@ export function checkTerminal() {
 }
 
 /**
- * Gets the last terminal.
+ * Gets the current terminal.
  */
-export function getLatestTerminal() {
+function getLatestTerminal(): vscode.Terminal {
   return _terminalStack[_terminalStack.length - 1];
 }
 
 /**
  * Gets the name of the current C file.
  */
-export function getFileName() {
-  return vscode.window.activeTextEditor.document.fileName.toString();
+function getFileName(): string {
+  return '"' + vscode.window.activeTextEditor.document.fileName.toString() + '"';
 }
 
 /**
  * Gets the path of TCC.
  * @param args Arguments for Tiny C Compiler.
  */
-export function tcc(args: string) {
+function tcc(args: string): string {
   return path.join(_context.extensionPath, "/Compiler/tcc.exe").concat(args);
+}
+
+/**
+ * Gets the compilation flags from the user via input box.
+ */
+function getFlags(): Thenable<string> {
+  return vscode.window.showInputBox({ prompt: "Please input flags." }).then(
+    // TODO: Parse flags for validity.
+    (value: string) => {
+      return value;
+    },
+    (reason: any) => {
+      vscode.window.showInformationMessage("Error!" + reason);
+    }
+  );
 }

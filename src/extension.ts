@@ -1,7 +1,5 @@
 "use strict";
-
 import * as vscode from "vscode";
-import * as path from "path";
 
 // Our files.
 import * as functions from "./functions";
@@ -19,5 +17,8 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(functions.runWithFlags());
 
 	 // TCC: Compile
-  context.subscriptions.push(functions.compile());
+	context.subscriptions.push(functions.compile());
+	
+	// TCC: Compile with flags...
+	context.subscriptions.push(functions.compileWithFlags());
 }
