@@ -18,12 +18,16 @@ export function run() {
 }
 
 export function runWithFlags() {
-  return vscode.commands.registerCommand("tcc-compiler.runWithFlags", () => {
-		let flags = getFlags();
-		
-    checkTerminal();
-    getLatestTerminal().sendText(tcc(flags + ' -run "' + getFileName() + '"'));
-    getLatestTerminal().show();
+	return vscode.commands.registerCommand("tcc-compiler.runWithFlags", () => {
+		let flags = "";
+		vscode.window.showInputBox({ prompt: "Please input flags!" }).then(
+			(val: string) => {
+				flags = " " + val;
+				checkTerminal();
+				getLatestTerminal().sendText(tcc(flags + ' -run "' + getFileName() + '"'));
+				getLatestTerminal().show();
+			}
+		);
   });
 }
 
@@ -56,6 +60,21 @@ export function compile() {
       var newSelection = new vscode.Selection(StartPosition, newPosition);
       editor.selection = newSelection;
     }
+  });
+}
+
+
+export function compileWithFlags() {
+	return vscode.commands.registerCommand("tcc-compiler.compileWithFlags", () => {
+		let flags = "";
+		vscode.window.showInputBox({ prompt: "Please input flags!" }).then(
+			(val: string) => {
+				flags = " " + val;
+				checkTerminal();
+				getLatestTerminal().sendText(tcc(flags + ' "' + getFileName() + '"'));
+				getLatestTerminal().show();
+			}
+		);
   });
 }
 
@@ -106,14 +125,13 @@ export function tcc(args: string) {
  * Gets the compilation flags from the user via input box.
  */
 function getFlags() {
-	vscode.window.showInputBox().then(
+	return vscode.window.showInputBox({prompt: "Please input flags."}).then(
 		// TODO: Parse flags for validity.
     (value: string) => {
       return value;
     },
 		(reason: any) => {
 			vscode.window.showInformationMessage("Error!" + reason);
-      return "";
     }
   );
 }
