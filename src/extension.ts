@@ -1,7 +1,5 @@
 "use strict";
-
 import * as vscode from "vscode";
-import * as path from "path";
 
 // Our files.
 import * as functions from "./functions";

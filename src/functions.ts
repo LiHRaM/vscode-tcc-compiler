@@ -18,16 +18,13 @@ export function run() {
 }
 
 export function runWithFlags() {
-  return vscode.commands.registerCommand(
-    "tcc-compiler.runWithFlags",
-    (flags: string) => {
-      checkTerminal();
-      getLatestTerminal().sendText(
-        tcc(flags + ' -run "' + getFileName() + '"')
-      );
-      getLatestTerminal().show();
-    }
-  );
+  return vscode.commands.registerCommand("tcc-compiler.runWithFlags", () => {
+		let flags = getFlags();
+		
+    checkTerminal();
+    getLatestTerminal().sendText(tcc(flags + ' -run "' + getFileName() + '"'));
+    getLatestTerminal().show();
+  });
 }
 
 export function compile() {
@@ -103,4 +100,20 @@ export function getFileName() {
  */
 export function tcc(args: string) {
   return path.join(_context.extensionPath, "/Compiler/tcc.exe").concat(args);
+}
+
+/**
+ * Gets the compilation flags from the user via input box.
+ */
+function getFlags() {
+	vscode.window.showInputBox().then(
+		// TODO: Parse flags for validity.
+    (value: string) => {
+      return value;
+    },
+		(reason: any) => {
+			vscode.window.showInformationMessage("Error!" + reason);
+      return "";
+    }
+  );
 }
