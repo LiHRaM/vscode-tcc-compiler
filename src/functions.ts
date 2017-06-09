@@ -21,6 +21,7 @@ export function run(): vscode.Disposable {
 
 /**
  * Compiles the current file with user-specified flags and then runs it.
+ * It does not save the compiled file.
  */
 export function runWithFlags(): vscode.Disposable {
   return vscode.commands.registerCommand("tcc-compiler.runWithFlags", () => {
