@@ -63,7 +63,6 @@ export function compile() {
   });
 }
 
-
 export function compileWithFlags() {
 	return vscode.commands.registerCommand("tcc-compiler.compileWithFlags", () => {
 		let flags = "";
@@ -77,7 +76,6 @@ export function compileWithFlags() {
 		);
   });
 }
-
 // Helper functions
 
 /**
