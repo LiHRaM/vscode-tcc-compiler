@@ -10,17 +10,14 @@ ext install tcc-compiler
 ```
 ## Features
 - Completely independent.
-- Instantly run the program by pressing ```F10```
-- Compile to executable file.
-
-## How To use?
-- Run script  >> ```F10``` <<
-- Compile script   >> ```command: tcc:Compile ``` <<
+- Instantly run the program by using palette command ```TCC: Run```
+- Compile to executable file with palette command ```TCC: Compile```
+- Set custom compilation flags with palette command ```TCC: Set flags...```
 
 ## FYI
-- Only supports Windows.
+- Currently only supports windows, although TCC compiler can be downloaded for Linux and MacOS as well from http://download.savannah.gnu.org/releases/tinycc/
 - Supports: ```C```
-- Compiler: ```Tiny C compiler```
+- Compiler: ```Tiny C compiler``` - https://bellard.org/tcc/
 
 ## License
 MIT

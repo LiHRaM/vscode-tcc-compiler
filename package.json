@@ -2,7 +2,7 @@
     "name": "vscode-tcc-compiler",
     "displayName": "TCC Compiler",
     "description": "Extension to simplify use of Tiny C Compiler in VSCode.",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "publisher": "lihram",
     "engines": {
         "vscode": "^1.12.0"
@@ -21,16 +21,16 @@
                 "title": "Run",
                 "category": "TCC"
             },
-						{
-							"command": "tcc-compiler.compile",
-							"title": "Compile",
-							"category": "TCC"
-						},
-						{
-							"command": "tcc-compiler.setFlags",
-							"title": "Set flags...",
-							"category": "TCC"
-						}
+            {
+                "command": "tcc-compiler.compile",
+                "title": "Compile",
+                "category": "TCC"
+            },
+            {
+                "command": "tcc-compiler.setFlags",
+                "title": "Set flags...",
+                "category": "TCC"
+            }
         ]
     },
     "scripts": {
