@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=master)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
+[![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=development)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
+
 
 # TCC Compiler README
 
