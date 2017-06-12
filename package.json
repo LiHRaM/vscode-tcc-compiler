@@ -2,7 +2,7 @@
     "name": "vscode-tcc-compiler",
     "displayName": "TCC Compiler",
     "description": "Extension to simplify use of Tiny C Compiler in VSCode.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "lihram",
     "engines": {
         "vscode": "^1.12.0"
