@@ -13,12 +13,9 @@ export function activate(context: vscode.ExtensionContext) {
   // TCC: Run
   context.subscriptions.push(functions.run());
 
-  // TCC: Run with flags...
-  context.subscriptions.push(functions.runWithFlags());
-
 	 // TCC: Compile
 	context.subscriptions.push(functions.compile());
-	
-	// TCC: Compile with flags...
-	context.subscriptions.push(functions.compileWithFlags());
+
+	// TCC: Set flags
+	context.subscriptions.push(functions.setFlags());
 }

@@ -21,19 +21,14 @@
                 "title": "Run",
                 "category": "TCC"
             },
-            {
-                "command": "tcc-compiler.runWithFlags",
-                "title": "Run with flags...",
-                "category": "TCC"
-            },
 						{
 							"command": "tcc-compiler.compile",
 							"title": "Compile",
 							"category": "TCC"
 						},
 						{
-							"command": "tcc-compiler.compileWithFlags",
-							"title": "Compile with flags...",
+							"command": "tcc-compiler.setFlags",
+							"title": "Set flags...",
 							"category": "TCC"
 						}
         ]
