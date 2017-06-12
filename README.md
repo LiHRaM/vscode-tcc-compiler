@@ -1,6 +1,8 @@
+# Build status
+## Master branch
 [![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=master)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
+## Development
 [![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=development)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
-
 
 # TCC Compiler README
 
@@ -8,7 +10,7 @@ This extension offers quick and hassle-free C compiling with the TCC compiler.
 
 ## Install 
 ```sh
-ext install tcc-compiler
+ext install vscode-tcc-compiler
 ```
 ## Features
 - Completely independent.
