@@ -20,7 +20,8 @@ ext install tcc-compiler
 - Compiler: ```Tiny C compiler``` - https://bellard.org/tcc/
 
 ## License
-MIT
+MIT - Extension
+GNU Lesser General Public License (LGPL) - Tiny C Compiler
 
 ## Contact info
 veeravat.jeen@bumail.net <-- Original author
