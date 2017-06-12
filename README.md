@@ -1,4 +1,8 @@
+# Build status
+## Master branch
 [![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=master)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
+## Development
+[![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=development)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
 
 # TCC Compiler README
 
@@ -6,24 +10,22 @@ This extension offers quick and hassle-free C compiling with the TCC compiler.
 
 ## Install 
 ```sh
-ext install tcc-compiler
+ext install vscode-tcc-compiler
 ```
 ## Features
 - Completely independent.
-- Instantly run the program by pressing ```F10```
-- Compile to executable file.
-
-## How To use?
-- Run script  >> ```F10``` <<
-- Compile script   >> ```command: tcc:Compile ``` <<
+- Instantly run the program by using palette command ```TCC: Run```
+- Compile to executable file with palette command ```TCC: Compile```
+- Set custom compilation flags with palette command ```TCC: Set flags...```
 
 ## FYI
-- Only supports Windows.
+- Currently only supports windows, although TCC compiler can be downloaded for Linux and MacOS as well from http://download.savannah.gnu.org/releases/tinycc/
 - Supports: ```C```
-- Compiler: ```Tiny C compiler```
+- Compiler: ```Tiny C compiler``` - https://bellard.org/tcc/
 
 ## License
-MIT
+MIT - Extension
+GNU Lesser General Public License (LGPL) - Tiny C Compiler
 
 ## Contact info
 veeravat.jeen@bumail.net <-- Original author
