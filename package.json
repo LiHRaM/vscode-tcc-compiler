@@ -4,6 +4,10 @@
     "description": "Extension to simplify use of Tiny C Compiler in VSCode.",
     "version": "1.0.4",
     "publisher": "lihram",
+		"repository": {
+			"type": "git",
+			"url": "https://github.com/LiHRaM/vscode-tcc-compiler"
+		},
     "engines": {
         "vscode": "^1.12.0"
     },
