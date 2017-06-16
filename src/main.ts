@@ -1,6 +1,6 @@
 "use strict";
 import { ExtensionContext, commands } from "vscode";
-import { run, compile, setFlags, setContext } from "./functions";
+import { run, compile, setFlags, setArgs, setContext } from "./commands";
 
 export function activate(context: ExtensionContext) {
   console.log("TCC-Compiler is active.");
@@ -27,5 +27,12 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand("tcc-compiler.setFlags", () => {
       setFlags();
     })
-  );
+	);
+	
+	// TCC: Set args
+	context.subscriptions.push(
+		commands.registerCommand("tcc-compiler.setArgs", () => {
+			setArgs();
+		})
+	);
 }
