@@ -5,8 +5,7 @@
 	"version": "1.0.4",
 	"publisher": "lihram",
 	"bugs": {
-		"url": "https://github.com/LiHRaM/vscode-tcc-compiler/issues",
-		"email": "smcbreen@microsoft.com"
+		"url": "https://github.com/LiHRaM/vscode-tcc-compiler/issues"
 	},
 	"homepage": "https://github.com/LiHRaM/vscode-tcc-compiler/blob/master/README.md",
 	"repository": {

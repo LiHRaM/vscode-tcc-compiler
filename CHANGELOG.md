@@ -1,7 +1,4 @@
-# Change Log
-All notable changes to the "tcc-compiler" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+# Changelog
 
 ## 1.0.0
 ### Added
