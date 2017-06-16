@@ -7,7 +7,6 @@ import {
   WorkspaceConfiguration
 } from "vscode";
 import * as path from "path";
-import * as fs from "fs";
 
 let _terminalStack = [];
 let _context = null;
@@ -33,54 +32,6 @@ export function compile(): void {
 }
 
 /**
- * Opens up and edits the current flags.
- * TODO: Make work!
- */
-export function setFlags(): void {
-  window
-    .showInputBox({ prompt: "Please input compile arguments." })
-    .then((val: string) => {
-      // No input?
-      if (val !== undefined || val === "") {
-        try {
-          let conf = workspace.getConfiguration("TCC");
-          conf
-            .update("TCC.flags", val, false)
-            .then(() =>
-              window.showInformationMessage("Flags successfully saved!")
-            );
-        } catch (error) {
-          console.log(error.message);
-        }
-      }
-    });
-}
-
-/**
- * File args for the TCC: Run command.
- * TODO: Make work!
- */
-export function setArgs(): void {
-  window
-    .showInputBox({ prompt: "Please input run arguments." })
-    .then((val: string) => {
-      // No input?
-      if (val !== undefined || val === "") {
-        try {
-          let conf = workspace.getConfiguration("TCC");
-          conf
-            .update("TCC.args", val, false)
-            .then(() =>
-              window.showInformationMessage("Arguments successfully saved!")
-            );
-        } catch (error) {
-          console.log(error.message);
-        }
-      }
-    });
-}
-
-/**
  * Sets the context.
  */
 export function setContext(context: ExtensionContext) {
@@ -93,9 +44,9 @@ export function setContext(context: ExtensionContext) {
 function getFlags(): string {
   let space = " ";
   try {
-    var conf = workspace.getConfiguration("TCC");
-    if (conf.flags !== undefined) {
-      return space + conf.flags;
+    var conf = workspace.getConfiguration("TCC").get("flags");
+    if (conf !== undefined) {
+      return space + conf;
     }
     throw new Error("No flags given. Reverting to default.");
   } catch (error) {
@@ -108,10 +59,11 @@ function getFlags(): string {
  * Gets the args from settings
  */
 function getArgs(): string {
+  let space = " ";
   try {
-    var conf = workspace.getConfiguration("TCC");
-    if (conf.args !== undefined) {
-      return conf.args;
+    var conf = workspace.getConfiguration("TCC").get("args");
+    if (conf !== undefined) {
+      return space + conf;
     }
     throw new Error("No args given. Reverting to default.");
   } catch (error) {

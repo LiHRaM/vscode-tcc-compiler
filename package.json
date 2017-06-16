@@ -25,6 +25,28 @@
 	],
 	"main": "./out/src/main",
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Tiny C Compiler configuration",
+			"properties": {
+				"TCC.flags": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": null,
+					"description": "Flags for compiling the file."
+				},
+				"TCC.args": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": null,
+					"description": "Default arguments for running the program."
+				}
+			}
+		},
 		"commands": [
 			{
 				"command": "tcc-compiler.run",
@@ -37,32 +59,8 @@
 				"title": "Compile",
 				"category": "TCC",
 				"description": "Compile with the current configuration"
-			},
-			{
-				"command": "tcc-compiler.setFlags",
-				"title": "Set flags...",
-				"category": "TCC",
-				"description": "Set the flags"
-			},
-			{
-				"command": "tcc-computer.setArgs",
-				"title": "Set args...",
-				"category": "TCC",
-				"descriptions": "Only necessary for TCC: Run" 
 			}
-		],
-		"configuration": {
-			"TCC.flags": {
-				"type": "string",
-				"default": "",
-				"description": "Flags for compiling the file."
-			},
-			"TCC.args": {
-				"type": "string",
-				"default": "",
-				"description": "Default arguments for running the program."
-			}
-		}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "tsc -p ./",
