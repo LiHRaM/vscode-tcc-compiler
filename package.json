@@ -1,49 +1,77 @@
 {
-    "name": "vscode-tcc-compiler",
-    "displayName": "TCC Compiler",
-    "description": "Extension to simplify use of Tiny C Compiler in VSCode.",
-    "version": "1.0.3",
-    "publisher": "lihram",
-    "engines": {
-        "vscode": "^1.12.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onLanguage:c"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "tcc-compiler.run",
-                "title": "Run",
-                "category": "TCC"
-            },
-            {
-                "command": "tcc-compiler.compile",
-                "title": "Compile",
-                "category": "TCC"
-            },
-            {
-                "command": "tcc-compiler.setFlags",
-                "title": "Set flags...",
-                "category": "TCC"
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
-    }
+	"name": "vscode-tcc-compiler",
+	"displayName": "TCC Compiler",
+	"description": "Extension to simplify use of Tiny C Compiler in VSCode.",
+	"version": "1.0.4",
+	"publisher": "lihram",
+	"bugs": {
+		"url": "https://github.com/LiHRaM/vscode-tcc-compiler/issues"
+	},
+	"homepage": "https://github.com/LiHRaM/vscode-tcc-compiler/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/LiHRaM/vscode-tcc-compiler"
+	},
+	"engines": {
+		"vscode": "^1.12.0"
+	},
+	"categories": [
+		"Languages",
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:c"
+	],
+	"main": "./out/src/main",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Tiny C Compiler configuration",
+			"properties": {
+				"TCC.flags": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": null,
+					"description": "Flags for compiling the file."
+				},
+				"TCC.args": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": null,
+					"description": "Default arguments for running the program."
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "tcc-compiler.run",
+				"title": "Run",
+				"category": "TCC",
+				"description": "Run with the current configuration"
+			},
+			{
+				"command": "tcc-compiler.compile",
+				"title": "Compile",
+				"category": "TCC",
+				"description": "Compile with the current configuration"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^2.0.3",
+		"vscode": "^1.0.0",
+		"mocha": "^2.3.3",
+		"@types/node": "^6.0.40",
+		"@types/mocha": "^2.2.32"
+	}
 }

@@ -1,7 +1,4 @@
-# Change Log
-All notable changes to the "tcc-compiler" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+# Changelog
 
 ## 1.0.0
 ### Added
@@ -21,3 +18,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 1.0.4
 - Fixed readme installation guide
 - Added build status for development branch
+
+## 1.1.0
+### Removed
+- TCC: Set flags...
+### Added
+- Settings option: TCC.flags
+- Settings option: TCC.args
+
+You can now set custom build and run settings for each workspace in the settings file.
+If the settings are not set, it'll simply run or compile the currently open c file.
