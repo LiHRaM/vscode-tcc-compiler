@@ -2,42 +2,35 @@ language: node_js
 sudo: false
 node_js:
 - node
-
 env:
   global:
     secure: BM+9u+grXpMqzlG7HfUGe1ff+QIiyn/VzxMWE81Jnc5CskFiYzvJ1j+5Ccevi0grvani/symlheOMCpKdG/9TNji2jcntL6YT8IFPQRv3AQ8MSM8vxAm21hA1g8xnW7U9nSWV/+TGXSWGbTnmhWOgMU/Uat4elgbgpC4J1EMh9XTL+Dq2qMYVMwRZBgCwvklQyE6NpyabbUj5KMxIc8Ju+TjN23W3QphOfQcyK+RY9CTpSsHFRN8V3kZ58bGpp1+pLo0uMZcI8XK6lwPYYadzLRR7vzD6zBSyJE7lX3fm3OGFQHNyV0SGjg09qQOUZ2wOQ33C6fsqJplnZMdNGD9IyoAGZoU6mpAVC4CARYSmcrKCVLtf0oJBeUgZanM9jMItW8LIaNUzzwUPrtzm7cvojR4W858eR++4GxlULLskDNv1yX7sVpov5WDEiftaeEsis7OJmKXqAg6ZE8bW0dmwbubeczbUtjQ3RCYNZEpvSaxh9mFFQzCJ7lOyopowKNlEzBSByHcxa0HmXp4d9G9P5v74uu5rkf9JyuPsJo3cZZiIEqt5wqEBgkH1e+1BShcN5XeyG/Ymgu+fpKyzqvH4GumGJnlIB0kOpTyQhY7f+sGNKYLPrlYB2iGqyx6xjJihFVuPYulDLCaN4kfRzirkGCjptciD8zUTkGVA37M8GE=
-
 before_install:
 - if [ $TRAVIS_OS_NAME == "linux" ]; then export CXX="g++-4.9" CC="gcc-4.9" DISPLAY=:99.0;
   sh -e /etc/init.d/xvfb start; sleep 3; fi
-
 install:
 - npm install
 - npm run vscode:prepublish
-
 script:
 - npm test --silent
-
 before_deploy:
-  - npm install -g vsce
-  - vsce package
-
+- npm install -g vsce
+- vsce package
+notifications:
+  email: false
 deploy:
-  - provider: releases
-    api_key: 
-      secure: "hrBcsrur1eA9PE8MAtVrQA/6jeTMdDmQF22YBxAVOxlRCvgbiWScM+RvfJm5hVYvwQ68n1ZagMNcWE/Sb/lm74RpGfcAvtIZJ+ZZ1UIscAcbSecp9WfEMSrz4f77bpmN39K4IZE1uTCdt8aF4lR/ZqLudxyqGkSOts52yIEr0OLBPqintOU6SZOBYZjBomHez9qPO52jwBLSVKhFGuiGGato2nKIhthH9DdEDDQnJccoEmDEJBGDXYUWNwElVBNy9U6kXt/tgPYteX0/qHBvNNQ8yI3pzAMPFoLLXAqdrYLjNZG8KjvWvApPhAfOM7HbwqR0JO/Cx2OK7eCBJiIBFcRWXhrbe61hDtBqCCQd6Z2EgaG+muN7u+ACZtX87ny+VgNMUfR3u6GxrdNIhv4y/NFHGlUyrXeCNvNGin9Av8NBYCtUG1OYnZjoMudEdyVhdJLBQ3SkjuQ35gKYI0yrofmGb2LOK750pgCDPxdIm9TsuToN0BECcDvqTeA37YcLIVjDK05pe9AYeUQk/ctzzXBB9c9QvixB6cwy1yuc4kOwCfsDFjwe4G7LMTpWP8JTCu5uSu6LEABOQD97UdgVAcLrC3g4txKGfTADeAEz61g5tiCBMo/NVRpLvxH5hVweLADGkcIsCn2w6heM7IwUt2rGy7RwUYkPc2k7n4ZAnx4="
-    file_glob: true
+  provider: releases
+  api_key:
+    secure: dsUFpvVADCPlsGrmAKMpeyBjdvvOb+VF7CUClGFrvRBX67KTgnwMkxZRMw4BXNQcnzQUFuTRg9sNzpR52eFfPBCVtrV7SrPudIBobmhfKqSffA42C3PNcrqnvPViVfcj1V248ORHFbiWomGIEPxw8mjYHm8biG7TZrqsKfN+7z8m0n4uJz1FyfacchPWE5YbbJksY1nW2WasKU8rbPHeIJnaxxlrq5G0s1N01KyRIdg+/HhnYkxStSTgMlG2rPHfUnW/9I6do2VEdmMkOQOtXvd/NiK7bNZDmn0nrVmC1Ndff5JxqgjEN0snvCY48HsMne9B+Gi6GK4DhP62mSRmkwzVKq1V5LXqUCVHM7st3twafBBpLY5I4GcMpHVCAm59Zp7DyOcsZPPPEM+xCeoK27Ln1j905oSsss/J2th8g+LsRdNZZAcAmLUAYe82G3QbD22CWRxjMFPnVqGL17LRV0nbdDfyxYl1i2L8nbPTID48sJ3O1MidQfpEeBgKxQvmS78cdOaHWUO/0YQWyixR+yu4fHst53VvgEJcUp/Pi+/pkmR15cweIZkqaqUb7wVRoCKcWubbWvLnP268+95nhcndunycSEV/r/OouZ2hWyfKMgQuzaDeePdgslecSMOLDk3m+saTBIDhfLgg08mFfpEXe6MNeciaxlnR+uKQ6tI=
+  file_glob: true
     file: "*.vsix"
     skip_cleanup: true
     on:
       repo: LiHRaM/vscode-tcc-compiler
       tags: true
-  - provider: script
+  provider: script
     script: vsce public -p $VS_TOKEN
     skip_cleanup: true
     on:
       repo: LiHRaM/vscode-tcc-compiler
       tags: true
-
-notifications:
-  email: false
