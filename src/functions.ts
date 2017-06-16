@@ -1,8 +1,5 @@
 "use strict";
-import * as vscode from "vscode";
-let window = vscode.window;
-let commands = vscode.commands;
-
+import { window, ExtensionContext, Terminal, workspace } from 'vscode';
 import * as path from "path";
 import * as fs from "fs";
 
@@ -13,51 +10,45 @@ let _context = null;
  * Runs according to current flags.
  * Defaults to currently open C file if no flags are given.
  */
-export function run(): vscode.Disposable {
-  return commands.registerCommand("tcc-compiler.run", () => {
-    checkTerminal();
-    getLatestTerminal().sendText(tcc(getArgs() + " -run "));
-    getLatestTerminal().show();
-  });
+export function run(): void {
+  checkTerminal();
+  getLatestTerminal().sendText(tcc(getArgs() + " -run "));
+  getLatestTerminal().show();
 }
 
 /**
  * Runs TCC according to given flags.
  * Defaults to currently open C file if no tcc.json file is found.
  */
-export function compile(): vscode.Disposable {
-  return commands.registerCommand("tcc-compiler.compile", () => {
-    checkTerminal();
-    getLatestTerminal().sendText(tcc(getArgs()));
-    getLatestTerminal().show();
-  });
+export function compile(): void {
+  checkTerminal();
+  getLatestTerminal().sendText(tcc(getArgs()));
+  getLatestTerminal().show();
 }
 
 /**
  * Opens up and edits the current flags.
  */
-export function setFlags(): vscode.Disposable {
-  return commands.registerCommand("tcc-compiler.setFlags", () => {
-    window
-      .showInputBox({ prompt: "Please input compile arguments." })
-      .then((val: string) => {
-        // No input?
-        if (val !== undefined || val === "") {
-          // Write to file.
-          let args = { fileArgs: val };
-          fs.writeFileSync(
-            path.join(getWorkspacePath(), "tcc.json"),
-            JSON.stringify(args)
-          );
-        }
-      });
-  });
+export function setFlags(): void {
+  window
+    .showInputBox({ prompt: "Please input compile arguments." })
+    .then((val: string) => {
+      // No input?
+      if (val !== undefined || val === "") {
+        // Write to file.
+        let args = { fileArgs: val };
+        fs.writeFileSync(
+          path.join(getSettingsDirectory(), "tcc.json"),
+          JSON.stringify(args)
+        );
+      }
+    });
 }
 
 /**
  * Sets the context.
  */
-export function setContext(context: vscode.ExtensionContext) {
+export function setContext(context: ExtensionContext) {
   _context = context;
 }
 
@@ -68,7 +59,7 @@ function getArgs(): string {
   let args = " ";
   try {
     var argsFile = JSON.parse(
-      fs.readFileSync(path.join(getWorkspacePath(), "tcc.json"), "utf8")
+      fs.readFileSync(path.join(getSettingsDirectory(), "tcc.json"), "utf8")
     );
     args += argsFile.fileArgs;
   } catch (error) {
@@ -93,7 +84,7 @@ function checkTerminal() {
 /**
  * Gets the current terminal.
  */
-function getLatestTerminal(): vscode.Terminal {
+function getLatestTerminal(): Terminal {
   return _terminalStack[_terminalStack.length - 1];
 }
 
@@ -118,8 +109,8 @@ function tcc(args: string): string {
 /**
  * If a folder is selected in vscode, then get the current workspace. Otherwise, it is assumed to be the current file folder.
  */
-function getWorkspacePath(): string {
-  return vscode.workspace.rootPath === undefined
-    ? path.join(getFileName(), "..")
-    : vscode.workspace.rootPath;
+function getSettingsDirectory(): string {
+	return workspace.rootPath === undefined
+		? path.join(getFileName(), "..", ".vscode")
+		: path.join(workspace.rootPath, ".vscode");
 }
