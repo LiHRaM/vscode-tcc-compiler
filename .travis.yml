@@ -19,16 +19,16 @@ before_deploy:
 notifications:
   email: false
 deploy:
-  provider: releases
-  api_key:
-    secure: dsUFpvVADCPlsGrmAKMpeyBjdvvOb+VF7CUClGFrvRBX67KTgnwMkxZRMw4BXNQcnzQUFuTRg9sNzpR52eFfPBCVtrV7SrPudIBobmhfKqSffA42C3PNcrqnvPViVfcj1V248ORHFbiWomGIEPxw8mjYHm8biG7TZrqsKfN+7z8m0n4uJz1FyfacchPWE5YbbJksY1nW2WasKU8rbPHeIJnaxxlrq5G0s1N01KyRIdg+/HhnYkxStSTgMlG2rPHfUnW/9I6do2VEdmMkOQOtXvd/NiK7bNZDmn0nrVmC1Ndff5JxqgjEN0snvCY48HsMne9B+Gi6GK4DhP62mSRmkwzVKq1V5LXqUCVHM7st3twafBBpLY5I4GcMpHVCAm59Zp7DyOcsZPPPEM+xCeoK27Ln1j905oSsss/J2th8g+LsRdNZZAcAmLUAYe82G3QbD22CWRxjMFPnVqGL17LRV0nbdDfyxYl1i2L8nbPTID48sJ3O1MidQfpEeBgKxQvmS78cdOaHWUO/0YQWyixR+yu4fHst53VvgEJcUp/Pi+/pkmR15cweIZkqaqUb7wVRoCKcWubbWvLnP268+95nhcndunycSEV/r/OouZ2hWyfKMgQuzaDeePdgslecSMOLDk3m+saTBIDhfLgg08mFfpEXe6MNeciaxlnR+uKQ6tI=
-  file_glob: true
-    file: "*.vsix"
-    skip_cleanup: true
-    on:
-      repo: LiHRaM/vscode-tcc-compiler
-      tags: true
-  provider: script
+  - provider: releases
+    api_key:
+      secure: dsUFpvVADCPlsGrmAKMpeyBjdvvOb+VF7CUClGFrvRBX67KTgnwMkxZRMw4BXNQcnzQUFuTRg9sNzpR52eFfPBCVtrV7SrPudIBobmhfKqSffA42C3PNcrqnvPViVfcj1V248ORHFbiWomGIEPxw8mjYHm8biG7TZrqsKfN+7z8m0n4uJz1FyfacchPWE5YbbJksY1nW2WasKU8rbPHeIJnaxxlrq5G0s1N01KyRIdg+/HhnYkxStSTgMlG2rPHfUnW/9I6do2VEdmMkOQOtXvd/NiK7bNZDmn0nrVmC1Ndff5JxqgjEN0snvCY48HsMne9B+Gi6GK4DhP62mSRmkwzVKq1V5LXqUCVHM7st3twafBBpLY5I4GcMpHVCAm59Zp7DyOcsZPPPEM+xCeoK27Ln1j905oSsss/J2th8g+LsRdNZZAcAmLUAYe82G3QbD22CWRxjMFPnVqGL17LRV0nbdDfyxYl1i2L8nbPTID48sJ3O1MidQfpEeBgKxQvmS78cdOaHWUO/0YQWyixR+yu4fHst53VvgEJcUp/Pi+/pkmR15cweIZkqaqUb7wVRoCKcWubbWvLnP268+95nhcndunycSEV/r/OouZ2hWyfKMgQuzaDeePdgslecSMOLDk3m+saTBIDhfLgg08mFfpEXe6MNeciaxlnR+uKQ6tI=
+    file_glob: true
+      file: "*.vsix"
+      skip_cleanup: true
+      on:
+        repo: LiHRaM/vscode-tcc-compiler
+        tags: true
+  - provider: script
     script: vsce public -p $VS_TOKEN
     skip_cleanup: true
     on:
