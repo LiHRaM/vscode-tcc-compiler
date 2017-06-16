@@ -16,7 +16,6 @@ ext install vscode-tcc-compiler
 - Completely independent.
 - Instantly run the program by using palette command ```TCC: Run```
 - Compile to executable file with palette command ```TCC: Compile```
-- Set custom compilation flags with palette command ```TCC: Set flags...```
 
 ## FYI
 - Currently only supports windows, although TCC compiler can be downloaded for Linux and MacOS as well from http://download.savannah.gnu.org/releases/tinycc/
@@ -26,9 +25,6 @@ ext install vscode-tcc-compiler
 ## License
 MIT - Extension
 GNU Lesser General Public License (LGPL) - Tiny C Compiler
-
-## Contact info
-veeravat.jeen@bumail.net <-- Original author
 
 ### Want to support?
 Feel free to report bugs, create issues or even pull requests at https://github.com/LiHRaM/vscode-tcc-compiler

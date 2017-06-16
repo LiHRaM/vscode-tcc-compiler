@@ -29,7 +29,7 @@ deploy:
     repo: LiHRaM/vscode-tcc-compiler
     tags: true
   provider: script
-  script: vsce public -p $VS_TOKEN
+  script: vsce publish -p $VS_TOKEN
   skip_cleanup: true
   on:
     repo: LiHRaM/vscode-tcc-compiler
