@@ -45,7 +45,7 @@ function getFlags(): string {
   let space = " ";
   try {
     var conf = workspace.getConfiguration("TCC").get("flags");
-    if (conf !== undefined) {
+    if (conf !==  null && conf !== undefined) {
       return space + conf;
     }
     throw new Error("No flags given. Reverting to default.");
@@ -62,7 +62,7 @@ function getArgs(): string {
   let space = " ";
   try {
     var conf = workspace.getConfiguration("TCC").get("args");
-    if (conf !== undefined) {
+    if (conf !==  null && conf !== undefined) {
       return space + conf;
     }
     throw new Error("No args given. Reverting to default.");

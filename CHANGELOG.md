@@ -1,7 +1,8 @@
 # Changelog
 
-## 1.1.1 - 1.1.3
+## 1.1.1 - 1.1.4
 - Minor system setup bug fixes.
+- Bugfix: Not entering anything in the settings with now default to running the open file again.
 
 ## 1.1.0
 ---
