@@ -1,4 +1,3 @@
-# Build status
 [![Build Status](https://travis-ci.org/LiHRaM/vscode-tcc-compiler.svg?branch=master)](https://travis-ci.org/LiHRaM/vscode-tcc-compiler)
 
 Quickly compile and run your C applications with the [Tiny C Compiler](https://bellard.org/tcc/) integrated with VSCode!
